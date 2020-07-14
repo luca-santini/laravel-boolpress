@@ -4,13 +4,16 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Post;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     public function index()
     {
-        return view('admin.home');
-    }
+       $posts = Post::with('category')->get();
+       return view('admin.posts.index', compact('posts'));
+   }
     public function create()
     {
         return view('admin.posts.create');
